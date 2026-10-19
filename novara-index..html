@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101312">
+<meta name="description" content="Nóvara Studio — design e desenvolvimento de experiências digitais.">
+<title>Nóvara Studio — Digital Experiences</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#101312;--panel:#171b19;--text:#f1efe8;--muted:#a6aaa2;--gold:#d4bd92;--line:#303632}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;line-height:1.65}
+a{color:inherit;text-decoration:none}button{font:inherit}
+.container{width:min(1160px,90%);margin:auto}
+header{position:sticky;top:0;z-index:10;background:rgba(16,19,18,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font:800 23px Manrope,sans-serif;letter-spacing:4px}.logo span{color:var(--gold)}
+nav{display:flex;gap:30px;align-items:center}nav a{font-size:13px;color:#c5c8c1}nav a:hover{color:var(--gold)}
+.nav-cta,.button{border:1px solid var(--gold);padding:11px 17px;display:inline-flex;align-items:center;gap:12px;font-size:13px;transition:.25s;cursor:pointer}
+.nav-cta:hover,.button:hover{background:var(--gold);color:#111}
+.menu-btn{display:none;background:none;border:0;color:white;font-size:25px}
+.hero{padding:110px 0 80px}.eyebrow{color:var(--gold);font-size:11px;letter-spacing:3px;text-transform:uppercase}
+.hero h1{font:500 clamp(43px,7vw,82px)/1.1 Manrope,sans-serif;letter-spacing:-4px;max-width:900px;margin:25px 0}
+.hero h1 em{font-style:normal;color:var(--gold)}.hero-copy{max-width:510px;color:var(--muted);font-size:16px}
+.hero-actions{display:flex;gap:15px;flex-wrap:wrap;margin-top:30px}.button.secondary{border-color:var(--line)}
+.hero-visual{margin-top:70px;position:relative;overflow:hidden;min-height:330px;background:#242b28}
+.hero-visual img{position:absolute;width:100%;height:100%;inset:0;object-fit:cover;opacity:.66}
+.visual-label{position:absolute;bottom:24px;left:25px;font-size:11px;letter-spacing:2px}
+.visual-index{position:absolute;top:25px;right:25px;color:var(--gold);font:12px Manrope}
+.section{padding:85px 0}.section-head{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:38px}
+h2{font:500 clamp(32px,4vw,49px)/1.2 Manrope;letter-spacing:-1.5px}.section-head p{color:var(--muted);font-size:13px;max-width:280px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+.filter{border:1px solid var(--line);background:none;color:var(--muted);padding:8px 15px;font-size:12px;cursor:pointer}
+.filter.active,.filter:hover{background:var(--gold);color:#151715;border-color:var(--gold)}
+.projects{display:grid;grid-template-columns:1fr 1fr;gap:35px 24px}.project{min-width:0}.project[hidden]{display:none}
+.project-image{position:relative;overflow:hidden;background:#222824;aspect-ratio:1.45}
+.project-image img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.project:hover .project-image img{transform:scale(1.045)}
+.project-image:after{content:"CONCEITO DEMONSTRATIVO";position:absolute;left:13px;bottom:13px;background:#111c;color:#f0e8d7;padding:5px 8px;font-size:9px;letter-spacing:1.2px}
+.project-meta{display:flex;justify-content:space-between;gap:15px;margin-top:16px;align-items:start}
+.project h3{font:500 21px Manrope}.project p{font-size:12px;color:var(--muted);margin-top:4px}.project-number{color:var(--gold);font-size:12px}
+.services{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.service{padding:27px 22px 27px 0;border-bottom:1px solid var(--line)}.service+.service{padding-left:22px;border-left:1px solid var(--line)}
+.service-icon{color:var(--gold);font-size:22px}.service h3{font:500 19px Manrope;margin:17px 0 9px}.service p{font-size:13px;color:var(--muted)}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:65px;align-items:center;background:var(--panel);padding:45px}
+.about p{color:var(--muted);font-size:14px;margin-top:20px}
+.about-art{min-height:290px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,#374239,#1b201d 65%)}
+.monogram{font:500 clamp(100px,16vw,180px) Manrope;color:var(--gold);letter-spacing:-15px}
+.contact{padding:90px 0;text-align:center;border-top:1px solid var(--line)}.contact h2{max-width:740px;margin:20px auto}
+.contact p{color:var(--muted);margin:18px auto 28px}
+footer{border-top:1px solid var(--line);padding:25px 0}.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer p,footer a{font-size:11px;color:var(--muted)}
+.reveal{opacity:0;transform:translateY(18px);transition:.65s}.reveal.visible{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}.reveal{opacity:1;transform:none}}
+@media(max-width:700px){.nav{height:68px}.menu-btn{display:block}
+nav{display:none;position:absolute;top:68px;left:0;right:0;padding:25px 5%;background:var(--bg);flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}
+nav.open{display:flex}.nav-cta{display:none}.hero{padding:75px 0 50px}.hero h1{letter-spacing:-2px}
+.hero-visual{min-height:250px;margin-top:45px}.section{padding:60px 0}.section-head{align-items:start;flex-direction:column}
+.projects{grid-template-columns:1fr;gap:30px}.services{grid-template-columns:1fr}.service,.service+.service{padding:23px 0;border-left:0}
+.about{grid-template-columns:1fr;padding:25px;gap:25px}.about-art{min-height:210px}.contact{padding:65px 0}}
+</style>
+</head>
+<body>
+<header><div class="container nav">
+<a class="logo" href="#inicio">NÓVARA<span>.</span></a>
+<button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false">☰</button>
+<nav id="nav"><a href="#projetos">Projetos</a><a href="#servicos">Serviços</a><a href="#estudio">Estúdio</a><a href="#contato">Contato</a></nav>
+<a class="nav-cta" href="#contato">Vamos conversar ↗</a>
+</div></header>
+<main>
+<section class="container hero" id="inicio">
+<span class="eyebrow">Estúdio digital independente</span>
+<h1>Sua marca merece ser <em>inesquecível.</em></h1>
+<p class="hero-copy">Criamos sites estratégicos, experiências digitais e identidades online para negócios que desejam se destacar.</p>
+<div class="hero-actions"><a class="button" href="#projetos">Explorar projetos ↗</a><a class="button secondary" href="#estudio">Conhecer o estúdio</a></div>
+<div class="hero-visual">
+<img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=85" alt="Ambiente de arquitetura contemporânea">
+<span class="visual-index">DIRECTION / 001</span><span class="visual-label">DESIGN COM INTENÇÃO. TECNOLOGIA COM PROPÓSITO.</span>
+</div></section>
+<section class="container section" id="projetos">
+<div class="section-head"><div><span class="eyebrow">01 / Portfólio</span><h2>Ideias em forma<br>de experiência.</h2></div><p>Uma seleção de conceitos que mostram como uma boa presença digital pode transformar uma marca.</p></div>
+<div class="filters" aria-label="Filtrar projetos"><button class="filter active" data-filter="todos">Todos</button><button class="filter" data-filter="institucional">Institucional</button><button class="filter" data-filter="servicos">Serviços</button><button class="filter" data-filter="ecommerce">Comércio</button></div>
+<div class="projects">
+<article class="project reveal" data-category="institucional"><div class="project-image"><img loading="lazy" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=80" alt="Escritório contemporâneo"></div><div class="project-meta"><div><h3>Atelier Forma</h3><p>Arquitetura · Institucional</p></div><span class="project-number">01 / 04</span></div></article>
+<article class="project reveal" data-category="servicos"><div class="project-image"><img loading="lazy" src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1000&q=80" alt="Equipe trabalhando em um projeto"></div><div class="project-meta"><div><h3>Vértice Consultoria</h3><p>Consultoria · Serviços</p></div><span class="project-number">02 / 04</span></div></article>
+<article class="project reveal" data-category="institucional"><div class="project-image"><img loading="lazy" src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=80" alt="Interior de escritório minimalista"></div><div class="project-meta"><div><h3>Orbe Business</h3><p>Negócios · Institucional</p></div><span class="project-number">03 / 04</span></div></article>
+<article class="project reveal" data-category="ecommerce"><div class="project-image"><img loading="lazy" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1000&q=80" alt="Tênis esportivo em composição de produto"></div><div class="project-meta"><div><h3>Ativa Objects</h3><p>Produtos · Comércio</p></div><span class="project-number">04 / 04</span></div></article>
+</div><p style="color:var(--muted);font-size:11px;margin-top:24px">Os projetos acima são conceitos demonstrativos, não trabalhos de clientes.</p>
+</section>
+<section class="container section" id="servicos"><div class="section-head"><div><span class="eyebrow">02 / O que fazemos</span><h2>Digital, com direção.</h2></div><p>Do primeiro conceito à experiência final, cada detalhe tem um propósito.</p></div>
+<div class="services">
+<article class="service"><span class="service-icon">↗</span><h3>Sites institucionais</h3><p>Presença profissional para apresentar sua empresa, gerar confiança e conquistar oportunidades.</p></article>
+<article class="service"><span class="service-icon">◇</span><h3>Landing pages</h3><p>Páginas objetivas para divulgar serviços, campanhas e transformar visitas em contatos.</p></article>
+<article class="service"><span class="service-icon">⌘</span><h3>Experiências digitais</h3><p>Interfaces personalizadas, vitrines digitais e soluções web alinhadas aos objetivos do negócio.</p></article>
+</div></section>
+<section class="container section" id="estudio"><div class="about reveal">
+<div><span class="eyebrow">03 / O estúdio</span><h2>Menos comum.<br>Mais memorável.</h2>
+<p>A Nóvara nasceu da ideia de que um site não deve apenas existir: deve comunicar valor, transmitir confiança e facilitar a vida de quem o utiliza.</p>
+<p>Unimos design, ferramentas modernas e desenvolvimento web para construir experiências digitais adaptadas a cada negócio.</p></div>
+<div class="about-art" aria-label="Símbolo gráfico da Nóvara"><span class="monogram">N.</span></div>
+</div></section>
+<section class="contact" id="contato"><div class="container">
+<span class="eyebrow">04 / Próximo projeto</span><h2>Vamos criar algo que represente o próximo nível da sua marca?</h2>
+<p>Conte sua ideia. Vamos conversar sobre como transformá-la em uma presença digital profissional.</p>
+<a class="button" href="https://wa.me/55SEUNUMERO" target="_blank" rel="noopener">Solicitar um orçamento ↗</a>
+<p style="font-size:11px">Antes de publicar, substitua o link acima pelo seu WhatsApp com código do país e DDD.</p>
+</div></section>
+</main>
+<footer><div class="container footer-inner"><a class="logo" href="#inicio">NÓVARA<span>.</span></a><p>© <span id="year"></span> Nóvara Studio. Todos os direitos reservados.</p><a href="#inicio">Voltar ao topo ↑</a></div></footer>
+<script>
+const menuBtn=document.getElementById('menuBtn'),nav=document.getElementById('nav');
+menuBtn.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open));menuBtn.setAttribute('aria-label',open?'Fechar menu':'Abrir menu');menuBtn.textContent=open?'×':'☰';});
+nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{nav.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.textContent='☰';}));
+document.querySelectorAll('.filter').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));button.classList.add('active');const category=button.dataset.filter;document.querySelectorAll('.project').forEach(project=>{project.hidden=category!=='todos'&&project.dataset.category!==category;});}));
+document.getElementById('year').textContent=new Date().getFullYear();
+if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));}else{document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));}
+</script>
+</body>
+</html>
